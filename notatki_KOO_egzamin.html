@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koordynowana Opieka Onkologiczna – Notatki do Egzaminu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #f5f0e8;
+    --card: #fffdf7;
+    --border: #d4c9b0;
+    --text: #1a1410;
+    --muted: #6b5e4a;
+    --accent-blue: #1a4a6b;
+    --accent-green: #2d6a4f;
+    --accent-red: #8b1a1a;
+    --accent-amber: #7a5c00;
+    --accent-purple: #4a1a6b;
+    --tag-bg: #e8e0d0;
+    --highlight: #fff3cd;
+    --highlight-border: #d4a017;
+    --danger: #fdf0f0;
+    --danger-border: #c44;
+    --success: #f0fdf4;
+    --success-border: #2d6a4f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Literata', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem 1rem;
+  }
+
+  .page-header {
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    border-bottom: 3px solid var(--text);
+    padding-bottom: 1.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .page-header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .how-to-use {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    background: var(--highlight);
+    border: 2px solid var(--highlight-border);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .how-to-use strong {
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--accent-amber);
+  }
+
+  .how-to-use ul {
+    margin-left: 1.2rem;
+  }
+
+  .toc {
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .toc h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 2rem;
+  }
+
+  .toc a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    display: block;
+  }
+
+  .toc a:hover { text-decoration: underline; }
+
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-right: 0.3rem;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    scroll-margin-top: 1rem;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 2px solid var(--border);
+    background: var(--tag-bg);
+  }
+
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .card-body {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* BLOKI SEMANTYCZNE */
+  .blok {
+    border-left: 4px solid var(--border);
+    padding: 0.6rem 0.9rem;
+    font-size: 0.92rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .blok-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .blok.definicja {
+    border-color: var(--accent-blue);
+    background: #f0f5fa;
+  }
+  .blok.definicja .blok-label { color: var(--accent-blue); }
+
+  .blok.kluczowe {
+    border-color: var(--accent-green);
+    background: var(--success);
+  }
+  .blok.kluczowe .blok-label { color: var(--accent-green); }
+
+  .blok.zapamietaj {
+    border-color: var(--highlight-border);
+    background: var(--highlight);
+  }
+  .blok.zapamietaj .blok-label { color: var(--accent-amber); }
+
+  .blok.uwaga {
+    border-color: var(--accent-red);
+    background: var(--danger);
+  }
+  .blok.uwaga .blok-label { color: var(--accent-red); }
+
+  .blok.przyklad {
+    border-color: var(--accent-purple);
+    background: #f5f0fa;
+  }
+  .blok.przyklad .blok-label { color: var(--accent-purple); }
+
+  .blok ul, .blok ol {
+    margin-left: 1.3rem;
+    margin-top: 0.2rem;
+  }
+
+  .blok li {
+    margin-bottom: 0.2rem;
+  }
+
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    background: #1a1410;
+    color: #f5f0e8;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  .autors {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding: 0.6rem 1.5rem 0.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.3rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .wymogi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .wymog-item {
+    background: #f0f5fa;
+    border: 1px solid #b0c4d8;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.88rem;
+  }
+
+  .wymog-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .kategoria-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .kategoria-item {
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .kategoria-item .kat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .kat-1 { border-color: #2d6a4f; }
+  .kat-1 .kat-num { color: #2d6a4f; }
+  .kat-2 { border-color: #7a5c00; }
+  .kat-2 .kat-num { color: #7a5c00; }
+  .kat-3 { border-color: #8b1a1a; }
+  .kat-3 .kat-num { color: #8b1a1a; }
+
+  .koszty-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .koszt-item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .koszt-item .koszt-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  strong { font-weight: 700; }
+  em { font-style: italic; color: var(--muted); }
+
+  @media (max-width: 600px) {
+    .toc-grid, .wymogi-grid, .kategoria-grid, .koszty-grid { grid-template-columns: 1fr; }
+    .card-body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Koordynowana Opieka Onkologiczna<br>Notatki do Egzaminu</h1>
+  <div class="subtitle">20 ZAGADNIEŃ · OPRACOWANIE NA PODSTAWIE ZAŁĄCZNIKA · EGZAMIN CZWARTEK</div>
+</header>
+
+
+
+<nav class="toc">
+  <h2>Spis zagadnień</h2>
+  <div class="toc-grid">
+    <div>
+      <a href="#z1"><span class="toc-num">01.</span> Zespół leczenia onkologicznego</a>
+      <a href="#z2"><span class="toc-num">02.</span> Zespół medyczny zarządzający leczeniem</a>
+      <a href="#z3"><span class="toc-num">03.</span> Korzyści z zespołu multidyscyplinarnego</a>
+      <a href="#z4"><span class="toc-num">04.</span> Ścieżki leczenia</a>
+      <a href="#z5"><span class="toc-num">05.</span> Value Based Health Care (VBHC)</a>
+      <a href="#z6"><span class="toc-num">06.</span> Rachunkowość zarządcza</a>
+      <a href="#z7"><span class="toc-num">07.</span> Benchmarking [cele, przebieg, w podmiotach leczniczych]</a>
+      <a href="#z8"><span class="toc-num">08.</span> Zrównoważona karta wyników</a>
+      <a href="#z9"><span class="toc-num">09.</span> Technologia medyczna i jej ocena w kontekście szpitali</a>
+      <a href="#z10"><span class="toc-num">10.</span> Kto ponosi odpowiedzialność za zdrowie [perspektywa ind. i zbiorowa]</a>
+    </div>
+    <div>
+      <a href="#z11"><span class="toc-num">11.</span> Pułapka racjonalności i free rider</a>
+      <a href="#z12"><span class="toc-num">12.</span> „Środki publiczne" – dlaczego niewystarczający termin</a>
+      <a href="#z13"><span class="toc-num">13.</span> Marnotrawienie zasobów zdrowotnych</a>
+      <a href="#z14"><span class="toc-num">14.</span> Centralizacja vs. decentralizacja</a>
+      <a href="#z15"><span class="toc-num">15.</span> Płatność za efekt (P4P)</a>
+      <a href="#z16"><span class="toc-num">16.</span> Współczynnik korygujący</a>
+      <a href="#z17"><span class="toc-num">17.</span> Opieka kompleksowa</a>
+      <a href="#z18"><span class="toc-num">18.</span> Perspektywa społeczna w kosztach</a>
+      <a href="#z19"><span class="toc-num">19.</span> Elementy analizy kosztów leczenia</a>
+      <a href="#z20"><span class="toc-num">20.</span> Szacowanie kosztów pośrednich</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- 1 -->
+  <div class="card" id="z1">
+    <div class="card-header">
+      <span class="card-num">01.</span>
+      <span class="card-title">Zespół leczenia onkologicznego</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        Wielospecjalistyczna grupa pracowników ochrony zdrowia współpracujących w celu zapewnienia <strong>kompleksowej opieki pacjentom onkologicznym</strong>.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Kluczowe punkty</div>
+        <ul>
+          <li>Skład zespołu (w Szkocji): chirurdzy, patologowie, interniści, radiolodzy, wykwalifikowane pielęgniarki</li>
+          <li>Praca wg <strong>wielospecjalistycznych wytycznych</strong></li>
+          <li>Formalne, <strong>cotygodniowe spotkania</strong></li>
+          <li>Regularne <strong>audyty</strong></li>
+          <li>Współpraca z organami kontrolnymi w regionie</li>
+        </ul>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Zapamiętaj – wyniki</div>
+        Wprowadzenie koordynacji poziomej → <strong>wyższe wskaźniki przeżywalności</strong> + <strong>mniejsze zróżnicowanie wskaźników przeżywalności</strong> między szpitalami.
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Inne przykłady koordynacji poziomej</div>
+        <ul>
+          <li>Sieć onkologów leczących pacjentów z nowotworami w tym samym regionie</li>
+          <li>Zespół ekspertów w krajowym centrum leczenia oparzeń</li>
+        </ul>
+        <p style="margin-top:0.4rem; font-size:0.88rem;"><strong>Podstawa koordynacji poziomej = praca zespołowa</strong></p>
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card" id="z2">
+    <div class="card-header">
+      <span class="card-num">02.</span>
+      <span class="card-title">Zespół medyczny zarządzający leczeniem nowotworowym</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        Zespół działający w ramach koordynowanej opieki onkologicznej, w którym <strong>lekarz odpowiada za diagnostykę, terapię, rokowania i recepty</strong>, a <strong>koordynatorzy</strong> zapewniają ciągłość leczenia.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 4 wymogi Holenderskiego Inspektoratu (2009)</div>
+        <div class="wymogi-grid">
+          <div class="wymog-item"><span class="wymog-num">1.</span>Pacjent komunikuje się z <strong>jednym punktem kontaktu</strong></div>
+          <div class="wymog-item"><span class="wymog-num">2.</span>Jedna osoba sprawuje <strong>nadzór nad programem leczenia</strong></div>
+          <div class="wymog-item"><span class="wymog-num">3.</span>Każdy pacjent ma <strong>aktualny plan leczenia</strong></div>
+          <div class="wymog-item"><span class="wymog-num">4.</span><strong>Koordynowana, całościowa dokumentacja</strong> dostępna dla wszystkich świadczeniodawców</div>
+        </div>
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Przykład – Holandia</div>
+        Koordynatorzy opieki zdrowotnej podają pacjentom leki w postaci <strong>infuzji</strong> i są odpowiedzialni za <strong>ciągłość leczenia</strong> podopiecznych.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card" id="z3">
+    <div class="card-header">
+      <span class="card-num">03.</span>
+      <span class="card-title">Korzyści z zespołu opieki multidyscyplinarnej</span>
+    </div>
+    <div class="card-body">
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Lista korzyści</div>
+        <ul>
+          <li>Wyższe wskaźniki przeżywalności pacjentów</li>
+          <li>Mniejsze zróżnicowanie wskaźników przeżywalności między szpitalami</li>
+          <li>Lepsza koordynacja opieki</li>
+          <li>Integracja wiedzy i doświadczenia specjalistów z różnych dziedzin</li>
+          <li>Poprawa jakości diagnostyki i planowania leczenia</li>
+        </ul>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Badanie do zapamiętania</div>
+        <strong>Kesson i wsp. (2012)</strong> – badanie dotyczące raka piersi wykazało, że wielodyscyplinarna praca zespołowa <strong>poprawia przeżycie pacjentów</strong>.
+      </div>
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Warunki skutecznej współpracy (D'Amour i wsp., 2005) – 5 wymogów</div>
+        <ul>
+          <li>Wspólne <strong>obowiązki</strong></li>
+          <li>Wspólne <strong>podejmowanie decyzji</strong></li>
+          <li>Wspólna <strong>filozofia</strong></li>
+          <li>Wspólne <strong>dane</strong></li>
+          <li>Wspólne <strong>planowanie i interwencje</strong></li>
+        </ul>
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Butt i wsp. – 3 aspekty współpracy</div>
+        <ol>
+          <li>Warunki podstawowe</li>
+          <li>Czynniki organizacyjne</li>
+          <li>Czynniki społeczne</li>
+        </ol>
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Warunek konieczny</div>
+        Praca zespołowa jest możliwa, gdy specjaliści <strong>pracują w zespole odbywającym regularne spotkania</strong> i <strong>znają się osobiście</strong>.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card" id="z4">
+    <div class="card-header">
+      <span class="card-num">04.</span>
+      <span class="card-title">Ścieżki leczenia</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja (Vanhaecht i wsp., 2007)</div>
+        Ścieżka opieki zdrowotnej = <strong>kompleksowa interwencja</strong> obejmująca wspólne podejmowanie decyzji oraz organizację procesów opieki dla <em>precyzyjnie zdefiniowanej grupy pacjentów</em> w <em>dokładnie określonym czasie</em>.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 5 cech charakterystycznych ścieżki opieki</div>
+        <ol>
+          <li>Wyraźne określenie <strong>celów i kluczowych elementów</strong> opieki (oparte na dowodach + oczekiwaniach pacjentów)</li>
+          <li>Ułatwienia <strong>komunikacyjne</strong> (między członkami zespołu, pacjentami, rodzinami)</li>
+          <li><strong>Koordynacja</strong> procesu opieki</li>
+          <li><strong>Dokumentacja, monitoring i ocena</strong> rozbieżności i wyników</li>
+          <li>Identyfikacja <strong>odpowiednich zasobów</strong></li>
+        </ol>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Cel = Potrójny cel (Triple Aim)</div>
+        <ol>
+          <li>Poprawa wyników pacjenta skorygowanych o ryzyko</li>
+          <li>Promowanie bezpieczeństwa pacjentów + zwiększenie satysfakcji</li>
+          <li>Optymalizacja wykorzystania zasobów</li>
+        </ol>
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Przykład – Anglia</div>
+        <strong>„Urgent referral pathway"</strong> – pilna ścieżka skierowań dla pacjentów z podejrzeniem nowotworu. Badania: <strong>zwiększa szansę przeżycia</strong>.
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Badanie Huiskes i Schrijvers</div>
+        Ścieżki są skuteczne, gdy spełniają <strong>13 warunków</strong>, m.in.: zarządzanie ścieżką, zaangażowanie wielu specjalistów, wytyczne oparte na dowodach, udział pacjentów w fazie opracowywania.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card" id="z5">
+    <div class="card-header">
+      <span class="card-num">05.</span>
+      <span class="card-title">Value Based Health Care (VBHC)</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        <strong>Opieka zdrowotna oparta na wartości</strong> – koncepcja Michaela Portera (2006, zaktualizowana 2010). Ocena opieki nie przez ilość wykonanych procedur, lecz przez <strong>wartość dla pacjenta</strong>.
+      </div>
+      <div class="formula">WARTOŚĆ = wyniki zdrowotne / koszty</div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 3 kategorie jakości wyników (Porter)</div>
+        <div class="kategoria-grid">
+          <div class="kategoria-item kat-1">
+            <span class="kat-num">Kategoria 1</span>
+            <strong>Osiągnięcie / utrzymanie dobrego stanu zdrowia</strong><br>
+            <em>przeżywalność, stan zdrowia, rehabilitacja</em>
+          </div>
+          <div class="kategoria-item kat-2">
+            <span class="kat-num">Kategoria 2</span>
+            <strong>Proces rehabilitacji</strong><br>
+            <em>czas rehabilitacji, powrót do normalnego życia, powikłania</em>
+          </div>
+          <div class="kategoria-item kat-3">
+            <span class="kat-num">Kategoria 3 ★</span>
+            <strong>Stabilność stanu zdrowia</strong><br>
+            <em>brak nawrotów, długofalowe efekty leczenia</em>
+          </div>
+        </div>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Zapamiętaj</div>
+        <strong>Najważniejszy miernik jakości</strong> = wskaźnik przeżywalności pacjentów z nowotworem = <strong>Kategoria 3</strong>.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers 2017; Porter & Olmsted Teisberg, Redefining health care, Harvard Business School Press, 2006</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card" id="z6">
+    <div class="card-header">
+      <span class="card-num">06.</span>
+      <span class="card-title">Rachunkowość zarządcza</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        Dostarcza informacji niezbędnych do <strong>podejmowania decyzji zarządczych</strong> w podmiotach leczniczych.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Kluczowe narzędzie</div>
+        <strong>TDABC – Time-Driven Activity Based Costing</strong> (Kaplan i Anderson, 2004) – metoda analizy kosztów opieki zdrowotnej. Uwzględnia czas poświęcony na poszczególne działania jako podstawę kalkulacji kosztów.
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Przyczyna marnotrawstwa</div>
+        Nieprawidłowo zaprojektowane systemy bodźców + brak odpowiednich struktur zarządzania zasobami → <strong>marnowanie zasobów</strong> (Kowalska, 2009).
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers 2017; Kowalska, Koordynowana opieka zdrowotna, WUW, Warszawa 2009</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card" id="z7">
+    <div class="card-header">
+      <span class="card-num">07.</span>
+      <span class="card-title">Benchmarking [cele, przebieg, benchmarking w podmiotach leczniczych]</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        Metoda doskonalenia organizacji poprzez <strong>porównywanie własnych procesów, wyników i praktyk z najlepszymi wzorcami</strong> w branży lub poza nią.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Cele benchmarkingu</div>
+        <ul>
+          <li>Doskonalenie organizacji poprzez uczenie się od najlepszych</li>
+          <li>Identyfikacja obszarów wymagających poprawy</li>
+          <li>Zmniejszenie rozpiętości wskaźników przeżywalności między szpitalami</li>
+          <li>Zmniejszenie nadużywania opieki zdrowotnej (rozbieżności w diagnostyce, skierowaniach i lekach omawiane na spotkaniach przeglądowych)</li>
+        </ul>
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Przebieg benchmarkingu</div>
+        <ol>
+          <li>Wybór wskaźników do porównania (wskaźniki przeżywalności, czasy oczekiwania, jakość opieki)</li>
+          <li>Zebranie danych własnych i wzorcowych</li>
+          <li>Porównanie z najlepszymi praktykami w branży lub poza nią</li>
+          <li>Identyfikacja luk i opracowanie działań naprawczych</li>
+          <li>Wdrożenie zmian i ponowny pomiar (cykl ciągły)</li>
+        </ol>
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Benchmarking w podmiotach leczniczych</div>
+        <ul>
+          <li>Porównywanie wskaźników przeżywalności pacjentów między szpitalami</li>
+          <li>Porównywanie czasów oczekiwania na świadczenia</li>
+          <li>Prowadzenie regularnych <strong>audytów</strong> w wielospecjalistycznych zespołach onkologicznych</li>
+          <li>Współpraca z organami kontrolnymi (np. Holenderski Inspektorat Opieki Zdrowotnej)</li>
+        </ul>
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Przykład – Holandia</div>
+        Holenderski Inspektorat stosował mechanizmy porównawcze + regularne audyty → <strong>zmniejszenie rozpiętości wskaźników przeżywalności między szpitalami</strong>.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card" id="z8">
+    <div class="card-header">
+      <span class="card-num">08.</span>
+      <span class="card-title">Zrównoważona karta wyników (Balanced Scorecard)</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        <strong>BSC (Balanced Scorecard)</strong> – narzędzie zarządzania strategicznego opracowane przez <strong>Kaplana i Nortona</strong>. W opiece zdrowotnej służy do pomiaru jakości opieki koordynowanej z wielu perspektyw jednocześnie.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 4 wymiary oceny opieki koordynowanej (model Donabediana, rozszerzony przez Portera)</div>
+        <ul>
+          <li>Jakość <strong>wyników</strong></li>
+          <li>Jakość <strong>procesów</strong></li>
+          <li>Jakość <strong>strukturalna</strong></li>
+          <li>Jakość <strong>postrzegana przez pacjenta</strong></li>
+        </ul>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Zapamiętaj autorów</div>
+        <ul>
+          <li>Kaplan RS, „Conceptual foundations of the balanced scorecard" (Harvard Business School, 2010)</li>
+          <li>Hepworth P, „Weighing it up" (JMD, 1998)</li>
+          <li>Schrijvers: potrzebne <strong>zrównoważone mierniki i metody mieszane</strong> (Kaboli, Mosher 2014)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card" id="z9">
+    <div class="card-header">
+      <span class="card-num">09.</span>
+      <span class="card-title">Technologia medyczna i jej ocena w kontekście szpitali</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Kim jest AOTMiT?</div>
+        <strong>Agencja Oceny Technologii Medycznych i Taryfikacji</strong> = państwowa jednostka organizacyjna z osobowością prawną, nadzorowana przez <strong>ministra właściwego ds. zdrowia</strong> (art. 31m Ustawy o świadczeniach).
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Zadania AOTMiT</div>
+        <ul>
+          <li>Wydawanie <strong>rekomendacji</strong> ws. kwalifikacji świadczeń jako gwarantowanych</li>
+          <li>Określanie lub zmiana <strong>poziomu / sposobu finansowania</strong> świadczeń gwarantowanych</li>
+          <li>Usuwanie świadczeń z wykazu gwarantowanych</li>
+          <li>Zmiana <strong>technologii medycznej</strong></li>
+          <li>Opracowywanie <strong>raportów HTA</strong> (Health Technology Assessment)</li>
+          <li>Opracowywanie <strong>analiz weryfikacyjnych</strong></li>
+          <li>Propozycje zaleceń dotyczących <strong>standardu rachunku kosztów</strong></li>
+        </ul>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Liczby – Polska vs. Japonia (Kieszkowska-Grudny, 2018)</div>
+        Na 1 milion potencjalnych pacjentów:
+        <ul>
+          <li>🇵🇱 Polska: <strong>16 tomografów</strong> komputerowych, <strong>&lt;7 aparatów MRI</strong></li>
+          <li>🇯🇵 Japonia: <strong>ponad 100 tomografów</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="autors">📚 Ustawa z 27 sierpnia 2004 r. o świadczeniach; Kieszkowska-Grudny, Zeszyt Naukowy SGH nr 169, 2018</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card" id="z10">
+    <div class="card-header">
+      <span class="card-num">10.</span>
+      <span class="card-title">Kto ponosi odpowiedzialność za zdrowie [dlaczego potrzebna jest perspektywa zarówno indywidualna jak i zbiorowa]</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Zasada ogólna</div>
+        Zdrowie podlega odpowiedzialności ogółu, ale <strong>jednostka również ma indywidualny obowiązek dbania o zdrowie</strong> – dla dobra całego kolektywu. (Muszala, 2003, cyt. za Tabaszewski)
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Perspektywa indywidualna</div>
+        <ul>
+          <li>Zdrowie jako <strong>przymiot osobisty</strong></li>
+          <li>Obowiązek dbania o <strong>własne zdrowie</strong></li>
+          <li>Zakaz działań <strong>przeciwko własnemu zdrowiu</strong></li>
+          <li>Prawo do wolności od bezprawnych zamachów na zdrowie</li>
+        </ul>
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Perspektywa zbiorowa</div>
+        <ul>
+          <li><strong>Państwo</strong> jest podmiotem zobowiązanym do zapewnienia podstawowej opieki zdrowotnej</li>
+          <li>Zdrowie grup społecznych ≠ prosta suma stanów zdrowia jednostek (wpływ czynników środowiskowych i społecznych)</li>
+          <li>Cel: zabezpieczenie zarówno potrzeb indywidualnych, jak i zbiorowych</li>
+        </ul>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Odpowiedzialność państwa – dwa aspekty</div>
+        <ul>
+          <li><strong>Wertykalny</strong>: obowiązek zapewnienia minimalnego poziomu bezpieczeństwa zdrowotnego</li>
+          <li><strong>Horyzontalny</strong>: regulacja stosunków między jednostkami a stronami prywatnymi</li>
+        </ul>
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Podstawa prawna</div>
+        Zrównoważona Europejska Karta Społeczna (cz. I, pkt 11): „Każdy ma prawo do korzystania z wszelkich środków umożliwiających mu osiągnięcie możliwie najlepszego stanu zdrowia."
+      </div>
+    </div>
+    <div class="autors">📚 Tabaszewski, Prawo do zdrowia w systemach ochrony praw człowieka, Lublin 2020</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card" id="z11">
+    <div class="card-header">
+      <span class="card-num">11.</span>
+      <span class="card-title">Pułapka racjonalności i free rider</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Pułapka racjonalności – definicja</div>
+        Każdy uczestnik systemu działa <strong>racjonalnie z punktu widzenia własnych interesów</strong>, ale suma tych indywidualnie racjonalnych działań prowadzi do <strong>nieefektywności całego systemu</strong>.<br>
+        <em>(podobne do „tragedii wspólnego pastwiska")</em>
+      </div>
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Free rider (gapowicz) – definicja</div>
+        Osoba, która <strong>korzysta ze świadczeń finansowanych ze składek ogółu</strong>, nie dbając o własne zdrowie lub generując ponadprzeciętne koszty. Działa racjonalnie indywidualnie, ale iracjonalnie społecznie (nie ponosi pełnych kosztów swojego zachowania).
+      </div>
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Moral hazard (pokusa nadużycia)</div>
+        Pośrednictwo ubezpieczyciela / płatnika publicznego rodzi:
+        <ul>
+          <li>Ze strony <strong>pacjenta</strong>: brak dbałości o zdrowie + nadmierny popyt na świadczenia</li>
+          <li>Ze strony <strong>świadczeniodawcy</strong>: kreowanie popytu przez podaż</li>
+        </ul>
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Dlaczego rynek zdrowia nie działa jak wolny rynek?</div>
+        <ul>
+          <li><strong>Asymetria informacji</strong> między producentem a konsumentem</li>
+          <li><strong>Efekty zewnętrzne</strong></li>
+          <li>Mechanizm cen nie zapewnia efektywnej alokacji zasobów</li>
+          <li>Profesjonaliści medyczni sami kształtują popyt (McGuire, 2000)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="autors">📚 Kowalska, Koordynowana opieka zdrowotna, WUW, Warszawa 2009</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card" id="z12">
+    <div class="card-header">
+      <span class="card-num">12.</span>
+      <span class="card-title">Dlaczego termin „środki publiczne" jest niewystarczający?</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Co obejmuje ustawa?</div>
+        Ustawa z 2004 r. używa terminu „środki publiczne" = środki NFZ + budżet państwa + budżety jednostek samorządu terytorialnego.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Dlaczego termin jest niewystarczający – 4 powody</div>
+        <ol>
+          <li>Znaczna część świadczeń finansowana ze <strong>źródeł prywatnych</strong> (out-of-pocket, ubezpieczenia prywatne, abonamenty pracodawców)</li>
+          <li>Finansowanie ze <strong>środków unijnych</strong> (Europejski Fundusz Społeczny)</li>
+          <li>Finansowanie ze środków <strong>Funduszu Medycznego</strong></li>
+          <li>Termin nie oddaje pełnego obrazu <strong>złożonych źródeł finansowania</strong></li>
+        </ol>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Liczby do zapamiętania</div>
+        <ul>
+          <li>🇵🇱 Polska: wydatki publiczne na zdrowie = <strong>ok. 6,4% PKB</strong></li>
+          <li>🌍 Średnia OECD: <strong>9% PKB</strong></li>
+        </ul>
+        (Kieszkowska-Grudny, 2018)
+      </div>
+    </div>
+    <div class="autors">📚 Ustawa z 27 sierpnia 2004 r.; Kieszkowska-Grudny, Zeszyt Naukowy SGH nr 169, 2018</div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card" id="z13">
+    <div class="card-header">
+      <span class="card-num">13.</span>
+      <span class="card-title">Dlaczego dochodzi do marnotrawienia ograniczonych zasobów zdrowotnych?</span>
+    </div>
+    <div class="card-body">
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 7 przyczyn marnotrawstwa</div>
+        <ol>
+          <li><strong>Nieprawidłowe systemy bodźców</strong> i brak struktur zarządzania zasobami (Kowalska, 2009)</li>
+          <li><strong>Nieelastyczność rynków</strong> czynników produkcji → zbyt dużo łóżek szpitalnych i nadmiar zatrudnienia</li>
+          <li>Podtrzymywanie nieefektywnych struktur z <strong>powodów politycznych</strong> (ochrona miejsc pracy)</li>
+          <li><strong>Moral hazard</strong> – nadmierny popyt + kreowanie popytu przez świadczeniodawców</li>
+          <li><strong>Brak koordynacji</strong> – w Polsce wiele świadczeń wykonywanych w szpitalu, choć mogłyby być ambulatoryjne (Kieszkowska-Grudny, 2018)</li>
+          <li><strong>Nieprzestrzeganie reżymu przyjmowania leków</strong> – średni odsetek nieprzestrzegania: <strong>ok. 50%</strong> (Schrijvers, 2017)</li>
+          <li><strong>Fragmentacja usług</strong> – powielanie badań i konsultacji</li>
+        </ol>
+      </div>
+    </div>
+    <div class="autors">📚 Kowalska 2009; Kieszkowska-Grudny 2018; Schrijvers 2017</div>
+  </div>
+
+  <!-- 14 -->
+  <div class="card" id="z14">
+    <div class="card-header">
+      <span class="card-num">14.</span>
+      <span class="card-title">Jakie świadczenia centralizować, a jakie decentralizować?</span>
+    </div>
+    <div class="card-body">
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ CENTRALIZOWAĆ – świadczenia wymagające</div>
+        <ul>
+          <li>Wysokiej specjalizacji i dużego doświadczenia</li>
+          <li>Leczenie <strong>rzadkich nowotworów</strong></li>
+          <li>Zabiegi wymagające <strong>specjalistycznego sprzętu</strong></li>
+          <li>Wielospecjalistyczne <strong>zespoły onkologiczne</strong></li>
+        </ul>
+        <p style="margin-top:0.5rem; font-size:0.88rem;"><em>Koncentracja w jednym miejscu promuje pracę zespołową i integrację wiedzy.</em></p>
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ DECENTRALIZOWAĆ – świadczenia podstawowe</div>
+        <ul>
+          <li>Wizyty <strong>kontrolne</strong> po leczeniu</li>
+          <li>Opieka <strong>paliatywna</strong></li>
+          <li><strong>Rehabilitacja</strong></li>
+        </ul>
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Ryzyka nadmiernej centralizacji</div>
+        <ul>
+          <li>Dłuższy czas dojazdu dla pacjentów</li>
+          <li>Długie listy oczekujących</li>
+          <li>Ryzyko fałszywie pozytywnej diagnozy (zbyt wiele łagodnych przypadków kierowanych do ośrodków specjalistycznych)</li>
+        </ul>
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Przykład – Szkocja</div>
+        Budowanie <strong>sieci onkologów</strong> w regionie dzięki koordynacji poziomej – bez konieczności pełnej centralizacji.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 15 -->
+  <div class="card" id="z15">
+    <div class="card-header">
+      <span class="card-num">15.</span>
+      <span class="card-title">Płatność za efekt (Pay-for-Performance, P4P)</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        <strong>P4P (Pay-for-Performance)</strong> = zachęta finansowa promująca <strong>jakość opieki zdrowotnej</strong>. Świadczeniodawcy otrzymują wyższe wynagrodzenie za lepsze wyniki kliniczne.
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Przykład – Wielka Brytania (POZ)</div>
+        Lekarze POZ otrzymują kwotę opartą o <strong>średni poziom HbA1C</strong> u leczonych pacjentów z cukrzycą. Korzystna średnia → <strong>wyższa kwota</strong>.
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Przykład – USA (Medicare i Medicaid)</div>
+        Nagradzają lekarzy i szpitale za <strong>niższą liczbę ponownych hospitalizacji</strong> i <strong>mniej zakażeń pooperacyjnych</strong>.
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Model cappuccino (Schrijvers) – 3 warstwy</div>
+        <ol>
+          <li>Opłata oparta o <strong>populację</strong> (podstawa)</li>
+          <li>Niskokwotowa <strong>opłata za usługę</strong></li>
+          <li><strong>P4P</strong> = „śmietanka" – trzecia warstwa</li>
+        </ol>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Eijkenaar i Schut (2015)</div>
+        Połączenie opłaty populacyjnej i P4P: opłata populacyjna może prowadzić do niższej jakości → P4P stanowi <strong>dodatkową zachętę do utrzymania jakości</strong>.
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Ryzyko P4P</div>
+        Źle zaprojektowany system P4P może prowadzić do <strong>niepożądanych zachowań</strong> lub <strong>zaniedbywania pacjentów nieobjętych systemem</strong>.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 16 -->
+  <div class="card" id="z16">
+    <div class="card-header">
+      <span class="card-num">16.</span>
+      <span class="card-title">Współczynnik korygujący</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        Narzędzie finansowe stosowane do <strong>modyfikacji wysokości płatności</strong> dla świadczeniodawców w zależności od spełnienia określonych <strong>standardów jakości lub efektywności</strong>.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Rola w systemie</div>
+        <ul>
+          <li>Stosowany przez NFZ w ramach kontraktowania świadczeń</li>
+          <li>Pełni rolę zbliżoną do <strong>P4P</strong> – promuje wyższą jakość opieki</li>
+          <li>W systemie podstawowego szpitalnego zabezpieczenia (art. 95l Ustawy) świadczeniodawcy mogą otrzymywać ryczałt populacyjny <strong>modyfikowany współczynnikami jakościowymi</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="autors">📚 Ustawa z 27 sierpnia 2004 r.; Schrijvers 2017</div>
+  </div>
+
+  <!-- 17 -->
+  <div class="card" id="z17">
+    <div class="card-header">
+      <span class="card-num">17.</span>
+      <span class="card-title">Co to opieka kompleksowa? Przykład w Polsce</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja prawna (art. 5 pkt 7a Ustawy o świadczeniach)</div>
+        Możliwość realizacji świadczeń w zakresach obejmujących <strong>niezbędne etapy i elementy procesu ich realizacji</strong>, w szczególności strukturę świadczeń w danym zakresie.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ Kompleksowość w opiece koordynowanej obejmuje</div>
+        <ul>
+          <li>Kompleksowe zarządzanie <strong>dostępem</strong> do świadczeń</li>
+          <li>Kompleksowe zarządzanie <strong>jakością</strong> udzielanych świadczeń</li>
+          <li>Generowanie <strong>pozytywnych bodźców</strong> dla wszystkich uczestników systemu</li>
+        </ul>
+        <p style="margin-top:0.5rem; font-size:0.88rem;"><strong>Kompleksowość = zasadniczy wyróżnik opieki koordynowanej</strong> (Koncepcja KAOZ, 2016)</p>
+      </div>
+      <div class="blok przyklad">
+        <div class="blok-label">🟣 Przykłady w Polsce</div>
+        <ul>
+          <li>Kompleksowa opieka nad <strong>kobietą i dzieckiem</strong></li>
+          <li>Łączenie kardiologii inwazyjnej i ortopedii z <strong>rehabilitacją</strong></li>
+          <li>Projekty reformy <strong>opieki psychiatrycznej</strong></li>
+          <li>W onkologii: od diagnostyki przez leczenie po rehabilitację i <strong>opiekę paliatywną</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="autors">📚 Ustawa z 27 sierpnia 2004 r.; Koncepcja KAOZ, 2016</div>
+  </div>
+
+  <!-- 18 -->
+  <div class="card" id="z18">
+    <div class="card-header">
+      <span class="card-num">18.</span>
+      <span class="card-title">Perspektywa społeczna w analizie kosztów leczenia</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Definicja</div>
+        Perspektywa społeczna uwzględnia <strong>nie tylko bezpośrednie koszty opieki medycznej</strong>, ale też koszty ponoszone przez pacjentów, rodziny i całe społeczeństwo.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 4 kategorie kosztów w perspektywie społecznej</div>
+        <div class="koszty-grid">
+          <div class="koszt-item">
+            <span class="koszt-label">Koszty bezpośrednie medyczne</span>
+            Hospitalizacje, ambulatoria, leki, diagnostyka, transport medyczny
+          </div>
+          <div class="koszt-item">
+            <span class="koszt-label">Koszty bezpośrednie niemedyczne</span>
+            Transport pacjenta, opieka nieformalna sprawowana przez rodzinę
+          </div>
+          <div class="koszt-item">
+            <span class="koszt-label">Koszty pośrednie</span>
+            Utrata produktywności (absencja, trwała niezdolność do pracy, przedwczesna śmierć)
+          </div>
+          <div class="koszt-item">
+            <span class="koszt-label">Koszty niematerialne</span>
+            Ból i cierpienie pacjenta i jego rodziny
+          </div>
+        </div>
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Ważna uwaga (Schrijvers)</div>
+        W standardowej analizie kosztów opieki koordynowanej <strong>koszty pośrednie i niematerialne nie są brane pod uwagę</strong> – choć są istotne z punktu widzenia społecznego.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers, Opieka koordynowana. Lepiej i taniej, NFZ, Warszawa 2017</div>
+  </div>
+
+  <!-- 19 -->
+  <div class="card" id="z19">
+    <div class="card-header">
+      <span class="card-num">19.</span>
+      <span class="card-title">Elementy uwzględniane podczas analizy kosztów leczenia</span>
+    </div>
+    <div class="card-body">
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 4 grupy elementów</div>
+        <ol>
+          <li><strong>Koszty bezpośrednie medyczne:</strong> świadczenia ambulatoryjne, hospitalizacje, leki, diagnostyka, transport medyczny</li>
+          <li><strong>Koszty bezpośrednie niemedyczne:</strong> transport pacjenta na wizyty, opieka nieformalna rodziny</li>
+          <li><strong>Koszty pośrednie:</strong> utrata produktywności – absencja, trwała niezdolność do pracy, przedwczesna śmierć (pacjenta lub opiekuna)</li>
+          <li><strong>Koszty niematerialne:</strong> ból i cierpienie pacjenta i rodziny</li>
+        </ol>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ Rola AOTMiT</div>
+        Opracowuje propozycje zaleceń dotyczących <strong>standardu rachunku kosztów</strong> dla podmiotów leczniczych (art. 31n pkt 1b Ustawy o świadczeniach).
+      </div>
+      <div class="blok uwaga">
+        <div class="blok-label">🔴 Kontekst polski</div>
+        Koszty farmakoterapii to <strong>najbardziej dynamicznie rosnący składnik kosztów</strong> opieki zdrowotnej w Polsce (Kowalska, 2009).
+      </div>
+    </div>
+    <div class="autors">📚 Ustawa z 27 sierpnia 2004 r.; Schrijvers 2017; Kowalska 2009</div>
+  </div>
+
+  <!-- 20 -->
+  <div class="card" id="z20">
+    <div class="card-header">
+      <span class="card-num">20.</span>
+      <span class="card-title">Sposób szacowania kosztów pośrednich</span>
+    </div>
+    <div class="card-body">
+      <div class="blok definicja">
+        <div class="blok-label">🔵 Czym są koszty pośrednie?</div>
+        Koszty wywoływane przez <strong>absencję w pracy, trwałą niezdolność do pracy oraz przedwczesną śmierć</strong> pacjenta lub jego opiekuna.
+      </div>
+      <div class="blok kluczowe">
+        <div class="blok-label">✅ 2 główne metody szacowania</div>
+        <div class="wymogi-grid">
+          <div class="wymog-item">
+            <span class="wymog-num">Metoda 1: HCA</span>
+            <strong>Human Capital Approach (Metoda kapitału ludzkiego)</strong><br>
+            Wycena utraconych zysków na podstawie <strong>wynagrodzenia osoby</strong> i okresu absencji / inwalidztwa
+          </div>
+          <div class="wymog-item">
+            <span class="wymog-num">Metoda 2: WTP</span>
+            <strong>Willingness to Pay (Gotowość do płacenia)</strong><br>
+            Kwota, jaką <strong>społeczeństwo jest gotowe zapłacić</strong> za uniknięcie danego stanu zdrowia
+          </div>
+        </div>
+      </div>
+      <div class="blok zapamietaj">
+        <div class="blok-label">⭐ AOTMiT i HTA</div>
+        W analizach HTA realizowanych przez AOTMiT stosuje się standardy metodologiczne obejmujące <strong>kalkulację kosztów pośrednich</strong> jako element szerszej analizy ekonomicznej.
+      </div>
+    </div>
+    <div class="autors">📚 Schrijvers 2017; Ustawa z 27 sierpnia 2004 r.</div>
+  </div>
+
+</div>
+
+<div style="max-width:900px; margin: 2.5rem auto 1rem; text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1.2rem; line-height: 2;">
+  Notatki przygotowane na podstawie materiałów z przedmiotu „Koordynowana opieka onkologiczna" · 20 zagadnień<br>
+  Opracowanie: Klaudia
+  <a href="https://github.com/Narenachi" target="_blank" rel="noopener" style="color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; vertical-align: middle;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle; opacity:0.7;">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+    </svg>
+    "Narenachi"
+  </a>
+  Iwaneczko
+</div>
+
+</body>
+</html>
